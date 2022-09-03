@@ -75,19 +75,3 @@ func main() {
 func numberCheck(str string) bool {
 	return regexp.MustCompile(`[0-9]$`).Match([]byte(str))
 }
-
-func keys(m map[string]string) []string {
-	ks := []string{}
-	for _, k := range m {
-		ks = append(ks, k)
-	}
-	return ks
-}
-
-func values(m map[string]string) []string {
-	vs := []string{}
-	for _, v := range m {
-		vs = append(vs, v)
-	}
-	return vs
-}
