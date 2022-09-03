@@ -30,18 +30,24 @@ func main() {
 	scanner := bufio.NewScanner(fp)
 
 	for scanner.Scan() {
-		// ここで一行ずつ処理
-		if !strings.HasPrefix(scanner.Text(), "#") {
-			// fmt.Println(scanner.Text())
-			slice := strings.Split(scanner.Text(), "=")
-			k := slice[0]
-			v := slice[1]
+		line := scanner.Text()
 
-			m[k] = v
+		// 空白行だったらスキップ
+		if line == "" {
+			continue
 		}
-	}
 
-	fmt.Println(keys(m))
+		// 先頭が#で始まっていたらスキップ
+		if strings.HasPrefix(line, "#") {
+			continue
+		}
+
+		slice := strings.Split(line, "=")
+		k := slice[0]
+		v := slice[1]
+
+		m[k] = v
+	}
 
 	for key, value := range m {
 		fmt.Println("{")
@@ -51,8 +57,7 @@ func main() {
 		} else {
 			fmt.Printf("	\"Value\": \"%s\"\n", value)
 		}
-		fmt.Println("}")
-		// fmt.Println(regexp.MustCompile(`[0-9]`).Match([]byte(value)))
+		fmt.Println("},")
 	}
 
 	if err = scanner.Err(); err != nil {
