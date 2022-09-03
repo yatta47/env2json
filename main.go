@@ -11,7 +11,7 @@ import (
 
 func main() {
 	var (
-		s = flag.String("f", "sample1.env", "env file name")
+		s = flag.String("f", "sample.env", "env file name")
 	)
 
 	flag.Parse()
