@@ -49,6 +49,7 @@ func main() {
 		m[k] = v
 	}
 
+	count := 1
 	for key, value := range m {
 		fmt.Println("{")
 		fmt.Printf("	\"Name\": \"%s\",\n", key)
@@ -57,7 +58,13 @@ func main() {
 		} else {
 			fmt.Printf("	\"Value\": \"%s\"\n", value)
 		}
-		fmt.Println("},")
+		if count == len(m) {
+			fmt.Println("}")
+		} else {
+			fmt.Println("},")
+		}
+
+		count++
 	}
 
 	if err = scanner.Err(); err != nil {
@@ -66,7 +73,7 @@ func main() {
 }
 
 func numberCheck(str string) bool {
-	return regexp.MustCompile(`[0-9]`).Match([]byte(str))
+	return regexp.MustCompile(`[0-9]$`).Match([]byte(str))
 }
 
 func keys(m map[string]string) []string {
